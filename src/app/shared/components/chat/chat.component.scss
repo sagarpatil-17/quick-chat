@@ -1,0 +1,70 @@
+@use '../../../common/scss/variables' as vars;
+
+.section-top {
+    background-color: vars.$white-50;
+
+    .chat-container {
+
+        .iconDiv {
+
+            &:first-child {
+                background-color: vars.$white;
+                border-radius: 6px;
+            }
+
+            i {
+                font-size: 24px;
+            }
+        }
+    }
+
+}
+
+.section-center {
+    height: calc(100vh - (140.4px + 7vh));
+    background-color: vars.$white-25;
+    padding: 2px 0 16px 0;
+
+    .messageDiv {
+        width: 100%;
+        display: flex;
+        justify-content: right;
+
+        .message {
+            background-color: vars.$white;
+            padding: 8px;
+            border-radius: 8px;
+            max-width: 70%;
+        }
+    }
+
+    .userMessageDiv {
+        width: 100%;
+        display: flex;
+        justify-content: left;
+
+        .userMessage {
+            background-color: vars.$white;
+            padding: 8px;
+            border-radius: 8px;
+            max-width: 70%;
+        }
+    }
+}
+
+.section-bottom {
+    background-color: vars.$white-50;
+
+    .iconDiv {
+        background-color: vars.$white;
+        border-radius: 6px;
+        padding: 4px 8px;
+
+        p {
+            i {
+                font-size: 24px;
+                cursor: pointer;
+            }
+        }
+    }
+}

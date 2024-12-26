@@ -1,0 +1,75 @@
+<div class="grid grid-cols-12 h-full">
+
+    <div class="col-span-2 sec-left">
+        <div class="flex flex-col gap-3 w-full">
+            <p class="text-center" [ngClass]="{'active':section == 'chats'}">
+                <i class="fa-solid fa-message" title="Chats" (click)="switchSections('chats')"></i>
+                <!-- <i class="fa-regular fa-message"></i> -->
+            </p>
+            <p class="text-center" [ngClass]="{'active':section == 'groups'}">
+                <i class="fa-solid fa-user-group" title="Groups" (click)="switchSections('groups')"></i>
+                <!-- <i class="fa-regular fa-user-group"></i> -->
+            </p>
+            <p class="text-center" [ngClass]="{'active':section == 'settings'}">
+                <i class="fa-solid fa-gear" title="Settings" (click)="switchSections('settings')"></i>
+            </p>
+            <p class="text-center">
+                <i class="fa-solid fa-right-from-bracket" title="Logout"></i>
+            </p>
+        </div>
+
+        <div class="w-full">
+            <p class="text-center profile-container">
+                <i class="fa-solid fa-user" title="Profile" (click)="switchSections('profile')"></i>
+            </p>
+        </div>
+    </div>
+
+    <div class="col-span-10 sec-right" [ngSwitch]="section">
+        <ng-container *ngSwitchCase="'chats'">
+            <div class="flex flex-col gap-1 pt-4 px-4">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-bold text-gray-600">Chats</h1>
+                    <p>
+                        <i class="fa-solid fa-plus"></i>
+                    </p>
+                </div>
+                <div>
+                    <input type="text" placeholder="Search"
+                        class="w-full rounded-md border px-3 py-1.5 focus:outline-none">
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <ng-container *ngFor="let a of [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]">
+                    <div class="grid grid-cols-12 gap-4 chat-section">
+                        <div class="col-span-2 flex justify-center items-center iconDiv">
+                            <i class="fa-solid fa-n"></i>
+                        </div>
+                        <div class="col-span-10 flex flex-col gap-1">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-gray-950 text-base">New Group</h2>
+                                <p class="text-sm">Monday</p>
+                            </div>
+                            <p class="text-sm">Test: Hey!</p>
+                        </div>
+                    </div>
+                    <hr>
+                </ng-container>
+            </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'groups'">
+            <h1>groups working</h1>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'settings'">
+            <h1>settings working</h1>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'profile'">
+            <h1>profile working</h1>
+        </ng-container>
+    </div>
+
+</div>
