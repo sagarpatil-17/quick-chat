@@ -1,53 +1,69 @@
-<div class="flex flex-col h-full border-l">
-    <div class="section-top">
-        <div class="grid grid-cols-12 gap-4 p-4 border-b chat-container">
-            <div class="col-span-1 flex justify-center items-center iconDiv">
-                <i class="fa-solid fa-n"></i>
-            </div>
-            <div class="col-span-10 flex justify-between items-center">
-                <div class="flex flex-col gap-0.5">
-                    <h2 class="text-gray-950 text-lg">New Group</h2>
-                    <p class="text-sm font-medium">Online</p>
-                </div>
-            </div>
-            <div class="col-span-1 flex justify-center items-center iconDiv">
-                <i class="fa-solid fa-ellipsis-vertical cursor-pointer"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="section-center">
-        <div class="px-4 grid grid-cols-12 gap-2 h-full overflow-y-auto" style="scrollbar-width: thin;">
-            <div class="col-span-1"></div>
-
-            <div class="col-span-10 flex flex-col justify-end gap-2">
-                <div class="messageDiv" *ngFor="let a of [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]">
-                    <span class="message">Hey!</span>
-                </div>
-                <div class="userMessageDiv">
-                    <span class="userMessage">Hello!</span>
-                </div>
-            </div>
-
-            <div class="col-span-1"></div>
-        </div>
-    </div>
-
-    <div class="section-bottom">
-        <div class="px-4 py-3 grid grid-cols-12 gap-2">
-            <div class="col-span-1 flex justify-center items-center iconDiv">
-                <p>
-                    <i class="fa-regular fa-face-smile"></i>
-                </p>
-            </div>
-            <input type="text" class="col-span-10 px-3 py-2 rounded-md focus:outline-none w-full"
-                placeholder="Type a message">
-            <div class="col-span-1 flex justify-center items-center iconDiv">
-                <p>
-                    <!-- <i class="fa-solid fa-paper-plane"></i> -->
-                    <i class="fa-regular fa-paper-plane"></i>
-                </p>
-            </div>
-        </div>
+<div class="imageDiv" *ngIf="isHome">
+    <div class="text-center flex flex-col gap-4">
+        <i class="fa-regular fa-comments"></i>
+        <label class="text-slate-500 text-4xl font-bold">
+            Welcome to <span class="chat">QuickChat</span>
+        </label>
+        <p class="text-slate-400 text-lg">
+            Your go-to app for seamless communication and collaboration.
+        </p>
     </div>
 </div>
+
+<ng-container *ngIf="!isHome">
+    <div class="flex flex-col h-full border-l">
+        <div class="section-top">
+            <div class="grid grid-cols-12 gap-4 p-4 border-b chat-container">
+                <div class="col-span-1 flex justify-center items-center iconDiv">
+                    <i class="fa-solid" [class]="'fa-'+groupInfo?.name?.[0]?.toLowerCase()"></i>
+                </div>
+                <div class="col-span-10 flex justify-between items-center">
+                    <div class="flex flex-col gap-0.5">
+                        <h2 class="text-gray-950 text-lg">{{groupInfo?.name}}</h2>
+                        <p class="text-sm font-medium">Online</p>
+                    </div>
+                </div>
+                <div class="col-span-1 flex justify-center items-center iconDiv">
+                    <i class="fa-solid fa-ellipsis-vertical cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-center">
+            <div class="px-4 grid grid-cols-12 gap-2 h-full overflow-y-auto" style="scrollbar-width: thin;">
+                <div class="col-span-1"></div>
+
+                <div class="col-span-10 flex flex-col justify-end gap-2">
+                    <div *ngFor="let msg of messages"
+                        [ngClass]="{'messageDiv': isMyMessage(msg), 'userMessageDiv': !isMyMessage(msg)}">
+                        <span class="message">{{msg?.content}}</span>
+                    </div>
+                    <!-- <div class="userMessageDiv">
+                        <span class="userMessage">Hello!</span>
+                    </div> -->
+                </div>
+
+                <div class="col-span-1"></div>
+            </div>
+        </div>
+
+        <div class="section-bottom">
+            <div class="px-4 py-3 grid grid-cols-12 gap-2">
+                <div class="col-span-1 flex justify-center items-center iconDiv">
+                    <p>
+                        <i class="fa-regular fa-face-smile"></i>
+                    </p>
+                </div>
+                <input [(ngModel)]="newMessage" type="text"
+                    class="col-span-10 px-3 py-2 rounded-md focus:outline-none w-full" placeholder="Type a message"
+                    (keyup.enter)="sendMessage()">
+                <div class="col-span-1 flex justify-center items-center iconDiv">
+                    <p>
+                        <!-- <i class="fa-solid fa-paper-plane"></i> -->
+                        <i class="fa-regular fa-paper-plane" (click)="sendMessage()"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

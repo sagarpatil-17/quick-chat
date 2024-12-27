@@ -1,5 +1,37 @@
 @use '../../../common/scss/variables' as vars;
 
+.imageDiv {
+    background-color: vars.$white-50;
+    height: calc(100vh - 6.2vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i{
+        font-size: 36px;
+    }
+
+    .chat {
+        color: #38bdf8;
+        opacity: 0;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            opacity: 0.5;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0.5;
+        }
+    }
+}
+
 .section-top {
     background-color: vars.$white-50;
 
@@ -43,7 +75,7 @@
         display: flex;
         justify-content: left;
 
-        .userMessage {
+        .message {
             background-color: vars.$white;
             padding: 8px;
             border-radius: 8px;

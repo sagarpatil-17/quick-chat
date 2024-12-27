@@ -1,8 +1,14 @@
 <!-- <app-chat></app-chat> -->
 <!-- <router-outlet /> -->
 
-<div class="laptop-view">
-    <div class="section-top"></div>
-    <div class="section-bottom"></div>
-    <app-layout></app-layout>
-</div>
+<ng-container *ngIf="isLoginPage">
+    <router-outlet />
+</ng-container>
+
+<ng-container *ngIf="!isLoginPage">
+    <div class="laptop-view">
+        <div class="section-top"></div>
+        <div class="section-bottom"></div>
+        <app-layout></app-layout>
+    </div>
+</ng-container>

@@ -1,0 +1,61 @@
+// common scss
+@use './variables.scss' as vars;
+
+// sweet alert
+.swal2-popup {
+    font-family: 'Mulish', sans-serif;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.swal2-title {
+    font-size: 1.6em !important;
+}
+
+.swal2-confirm {
+    background-color: #0ea5e9 !important;
+    color: white !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+// buttons
+.primary-btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #fff;
+    background-color: vars.$primary-color;
+    cursor: pointer;
+
+    &:hover {
+        background-color: vars.$darkblue;
+    }
+}
+
+.danger-btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #fff;
+    background-color: vars.$red;
+    cursor: pointer;
+
+    &:hover {
+        background-color: vars.$darkred;
+    }
+}
+
+// common css
+.link {
+    color: vars.$primary-color;
+    cursor: pointer;
+
+    :hover {
+        color: vars.$darkblue;
+    }
+}

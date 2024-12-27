@@ -1,0 +1,30 @@
+<div class="container m-auto">
+    <label class="text-slate-500 text-4xl"> Quick<span class="chat">Chat</span></label>
+    <div class="login">
+        <h1 class="text-2xl text-center">Please Sign In</h1>
+        <form class="mt-5" [formGroup]="signinForm">
+            <input type="username" class="input-field" placeholder="Enter your username" formControlName="username">
+            <input type="password" class="input-field" placeholder="Enter your password" formControlName="password">
+
+            <div class="flex items-center">
+                <div class="checkbox-container">
+                    <input #agreeWith id="terms" type="checkbox" checked class="checkbox" />
+                    <label for="terms"></label>
+                </div>
+                <label for="terms" class="ms-2 text-sm font-medium text-gray-900">I agree with the
+                    <a target="_blank">terms and conditions</a>
+                </label>
+            </div>
+            <div class="my-5">
+                <button class="btn-signin" (click)="onSignin(agreeWith.checked ? true :false)" [disabled]="isLoading">
+                    <span class="loader" *ngIf="isLoading"></span>
+                    <span *ngIf="!isLoading">Sign In</span>
+                </button>
+            </div>
+            <div class="links">
+                <a routerLink="/forgot-password">I forgot my password</a>
+                <a routerLink="/sign-up">Are you a new user?</a>
+            </div>
+        </form>
+    </div>
+</div>

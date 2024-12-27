@@ -1,0 +1,18 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div class="p-4">
+    <div class="flex justify-between items-center">
+        <h1 class="text-lg font-medium">New Group</h1>
+        <i class="fa-solid fa-close text-xl cursor-pointer" (click)="dialogRef.close()"></i>
+    </div>
+    <hr class="my-4">
+    <div class="grid grid-cols-1 gap-4" [formGroup]="groupForm">
+        <input type="text" placeholder="Name" class="px-3 py-1.5 rounded-md border" formControlName="name">
+        <textarea type="text" rows="3" placeholder="Description" class="px-3 py-1.5 rounded-md border"
+            formControlName="description"></textarea>
+        <div class="flex justify-between">
+            <button class="danger-btn" (click)="dialogRef.close()">Close</button>
+            <button class="primary-btn" (click)="createGroup()" [disabled]="isLoading">Create Group</button>
+        </div>
+    </div>
+</div>
