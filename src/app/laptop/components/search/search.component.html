@@ -1,0 +1,32 @@
+<div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-1 pt-4 px-4">
+        <div class="py-3">
+            <h1 class="text-2xl font-bold text-gray-600">Search</h1>
+        </div>
+        <div>
+            <input type="text" placeholder="Search" [formControl]="searchText" class="input-control">
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <ng-container *ngFor="let user of users">
+            <div class="grid grid-cols-12 gap-4 chat-section">
+                <div class="col-span-2 flex justify-center items-center iconDiv">
+                    <i class="fa-solid" [class]="'fa-'+user?.username?.[0]?.toLowerCase()"></i>
+                </div>
+                <div class="col-span-8 grid grid-cols-1 gap-1">
+                    <h2 class="text-gray-950 text-base">{{user?.username}}</h2>
+                    <p class="text-sm">{{user?.about}}</p>
+                </div>
+                <div class="col-span-2 flex justify-center items-center userIcon">
+                    <i class="fa-solid fa-user-plus" (click)="sendRequest(user?.id)"
+                        *ngIf="!isLoading && (user?.receivedFriendRequests?.length == 0)"></i>
+                    <i class="fa-solid fa-user-clock"
+                        *ngIf="!isLoading && (user?.receivedFriendRequests?.[0].status =='pending')"></i>
+                    <span class="spinner" *ngIf="isLoading"></span>
+                </div>
+            </div>
+            <hr>
+        </ng-container>
+    </div>
+</div>

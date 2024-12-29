@@ -10,11 +10,17 @@
                 <i class="fa-solid fa-user-group" title="Groups" (click)="switchSections('groups')"></i>
                 <!-- <i class="fa-regular fa-user-group"></i> -->
             </p>
-            <p class="text-center" [ngClass]="{'active':section == 'settings'}">
+            <!-- <p class="text-center" [ngClass]="{'active':section == 'settings'}">
                 <i class="fa-solid fa-gear" title="Settings" (click)="switchSections('settings')"></i>
+            </p> -->
+            <p class="text-center" [ngClass]="{'active':section == 'request'}">
+                <i class="fa-solid fa-user-plus" title="Friend Request" (click)="switchSections('request')"></i>
+            </p>
+            <p class="text-center" [ngClass]="{'active':section == 'search'}">
+                <i class="fa-solid fa-magnifying-glass" title="Search" (click)="switchSections('search')"></i>
             </p>
             <p class="text-center">
-                <i class="fa-solid fa-right-from-bracket" title="Logout"></i>
+                <i class="fa-solid fa-right-from-bracket" title="Logout" (click)="onLogout()"></i>
             </p>
         </div>
 
@@ -31,7 +37,7 @@
                 <div class="flex justify-between items-center">
                     <h1 class="text-2xl font-bold text-gray-600">Chats</h1>
                     <p>
-                        <i class="fa-solid fa-plus"></i>
+                        <i class="fa-solid fa-plus" (click)="switchSections('search')"></i>
                     </p>
                 </div>
                 <div>
@@ -41,17 +47,17 @@
             </div>
 
             <div class="chat-container">
-                <ng-container *ngFor="let a of [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]">
-                    <div class="grid grid-cols-12 gap-4 chat-section">
+                <ng-container *ngFor="let list of friendList">
+                    <div class="grid grid-cols-12 gap-4 chat-section" [ngClass]="{'chat-active': list == id}">
                         <div class="col-span-2 flex justify-center items-center iconDiv">
-                            <i class="fa-solid fa-n"></i>
+                            <i class="fa-solid" [class]="'fa-'+list?.friend?.username?.[0]?.toLowerCase()"></i>
                         </div>
                         <div class="col-span-10 flex flex-col gap-1">
                             <div class="flex justify-between items-center">
-                                <h2 class="text-gray-950 text-base">New Group</h2>
-                                <p class="text-sm">Monday</p>
+                                <h2 class="text-gray-950 text-base">{{list?.friend?.username}}</h2>
+                                <p class="text-sm">{{list?.createdAt | date}}</p>
                             </div>
-                            <p class="text-sm">Test: Hey!</p>
+                            <p class="text-sm">{{list?.friend?.about}}</p>
                         </div>
                     </div>
                     <hr>
@@ -75,7 +81,8 @@
 
             <div class="chat-container">
                 <ng-container *ngFor="let grp of myGroups">
-                    <div class="grid grid-cols-12 gap-4 chat-section" [routerLink]="'/group/'+grp?.groupId">
+                    <div class="grid grid-cols-12 gap-4 chat-section" [routerLink]="'/group/'+grp?.groupId"
+                        [ngClass]="{'chat-active': grp?.groupId == id}">
                         <div class="col-span-2 flex justify-center items-center iconDiv">
                             <i class="fa-solid" [class]="'fa-'+grp?.group?.name?.[0]?.toLowerCase()"></i>
                         </div>
@@ -92,12 +99,47 @@
             </div>
         </ng-container>
 
-        <ng-container *ngSwitchCase="'settings'">
-            <h1>settings working</h1>
+        <ng-container *ngSwitchCase="'request'">
+            <app-request></app-request>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'search'">
+            <app-search></app-search>
         </ng-container>
 
         <ng-container *ngSwitchCase="'profile'">
-            <h1>profile working</h1>
+            <div class="p-4 grid grid-cols-1 gap-6 relative">
+                <app-loader2 *ngIf="isLoading"></app-loader2>
+                <div class="py-3">
+                    <h1 class="text-2xl font-bold text-gray-600">Profile</h1>
+                </div>
+
+                <div class="flex m-auto">
+                    <div class="profileLogo">
+                        <i class="fa-solid" [class]="'fa-'+_sharedService?.userInfo?.username?.[0]?.toLowerCase()"></i>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4" [formGroup]="profileForm">
+                    <div class="flex flex-col">
+                        <label>Username</label>
+                        <input type="text" class="input-control" placeholder="Username" formControlName="username">
+                    </div>
+                    <div class="flex flex-col">
+                        <label>Email</label>
+                        <input type="text" class="input-control" placeholder="Email" formControlName="email">
+                    </div>
+                    <div class="flex flex-col">
+                        <label>About</label>
+                        <input type="text" class="input-control" placeholder="About" formControlName="about">
+                    </div>
+                    <!-- <div class="flex flex-col">
+                        <label>Password</label>
+                        <input type="text" class="input-control" placeholder="Password" formControlName="password">
+                    </div> -->
+                    <button class="primary-btn" (click)="updateUser()" [disabled]="isLoading">Update Profile</button>
+                </div>
+            </div>
         </ng-container>
     </div>
 

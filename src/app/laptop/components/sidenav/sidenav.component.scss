@@ -1,4 +1,5 @@
 @use '../../../common/scss/variables' as vars;
+@use '../../../common/scss/common';
 
 .sec-left {
     height: 100%;
@@ -86,9 +87,31 @@
         scrollbar-width:thin;
     }
 
+    .profileLogo {
+        background-color: vars.$white-25;
+        border-radius: 50%;
+        width: 240px;
+        height: 240px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        i {
+            font-size: 100px;
+        }
+    }
+
 }
 
 .active {
     background-color: vars.$white-25;
     border-radius: 6px;
+}
+
+.chat-active {
+    background-color: vars.$white-50;
+
+    .iconDiv {
+        background-color: vars.$white;
+    }
 }

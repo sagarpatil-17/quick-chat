@@ -1,22 +1,16 @@
 // common scss
 @use './variables.scss' as vars;
 
-// sweet alert
-.swal2-popup {
-    font-family: 'Mulish', sans-serif;
-    font-size: 18px;
-    border-radius: 10px;
-}
+// inputs
+.input-control {
+    padding: 6px 12px;
+    border-width: 1px;
+    border-radius: 6px;
+    width: 100%;
 
-.swal2-title {
-    font-size: 1.6em !important;
-}
-
-.swal2-confirm {
-    background-color: #0ea5e9 !important;
-    color: white !important;
-    box-shadow: none !important;
-    outline: none !important;
+    &:focus {
+        outline: none;
+    }
 }
 
 // buttons
